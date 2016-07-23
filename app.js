@@ -1,7 +1,5 @@
-var crypto = require( 'crypto' ),
-	net = require( 'net' ),
+var net = require( 'net' ),
 	rl = require( 'readline' ),
-	https = require( 'https' ),
 	request = require( 'request' )
 	config = require( __dirname + '/config.json' )
 	Membership = require( __dirname + '/membership.js' );
