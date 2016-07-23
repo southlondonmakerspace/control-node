@@ -1,0 +1,29 @@
+{
+	"port": 1234,
+	"secret": "",
+	"discourse": {
+		"url": "",
+		"topic": "",
+		"api_username": "",
+		"api_key": ""
+	},
+	"devices": {
+		"membership": {
+			"permission": [ 0 ]
+		},
+		"door": {
+			"permission": [ 10, 11, 12, 20, 21, 22 ],
+			"message": {
+				"success": " opened the door.",
+				"failed":  " was prevented from opening the door."
+			}
+		},
+		"shutter": {
+			"permission": [ 20, 21, 22 ],
+			"message": {
+				"success": " operated the shutter.",
+				"failed":  " was prevented from operating the shutter."
+			}
+		}
+	}
+}
