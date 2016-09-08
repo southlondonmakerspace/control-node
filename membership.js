@@ -3,22 +3,25 @@ var request = require( 'request' ),
 	config = require( __dirname + '/config.json' );
 
 var Membership = {
-	validate: function ( id , callback ) {
+	validate: function ( tag, device, callback ) {
 		var response = {
 			active: false,
 			valid: false
 		}
-		id = Membership.hashCard( id );
-		request( 'https://members.southlondonmakerspace.org/api/member?card_id_hash=' + id, function( err, res, body ) {
-			var member = JSON.parse( body );
-			if ( member.success != false ) {
-				response.valid = true;
-				response.name = member.name;
-				response.permission = member.permission;
-				if ( member.active )
-					response.active = true;
+		id = Membership.hashCard( tag );
+		var url = config.api_url + '/api/permission/' + device  + '/' + id + '?api_key=' + config.api_key;
+		request( url, function( err, res, body ) {
+			if ( res.statusCode == 200 ) {
+				var data = JSON.parse( body );
+				callback( {
+					valid: true,
+					name: data.name
+				} );
+			} else {
+				callback( {
+					valid: false
+				} );
 			}
-			callback( response );
 		} )
 	},
 	hashCard: function ( id ) {
