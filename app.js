@@ -60,10 +60,11 @@ function clientData( buffer ) {
 		return;
 	}
 
+	// Get device ID
 	if ( client.device == undefined ) {
 		if ( config.devices[tag] == undefined ) {
 			console.log( '#' + client.name + '	Invalid device ID' );
-			declineClient( client, '' );
+			declineClient( client );
 			return;
 		}
 
@@ -72,12 +73,14 @@ function clientData( buffer ) {
 		return;
 	}
 
+	// Get tag #
 	if ( tag == '' ) {
 		console.log( '#' + client.name + '	Card Number Not Sent' );
 		declineClient( client );
 		return;
 	}
 
+	// Block Natwest contactless cards
 	if ( tag == contactless_id ) {
 		console.log( '#' + client.name + '	Contactless Card Use Blocked (21222324)' );
 		declineClient( client );
@@ -86,13 +89,9 @@ function clientData( buffer ) {
 
 	console.log( '#' + client.name + '	Tag: ' + tag );
 
-	Membership.validate( tag, function( res ) {
-		if ( res.active ) {
-			if ( checkPermission( res.permission, client.device ) ) {
-				validateClient( client, res, tag );
-			} else {
-				declineClient( client, res, tag )
-			}
+	Membership.validate( tag, config.devices[ client.device ].permission, function( res ) {
+		if ( res.valid ) {
+			validateClient( client, res, tag );
 		} else {
 			declineClient( client, res, tag )
 		}
@@ -142,17 +141,12 @@ function declineClient( client, data, tag ) {
 	// Send notification
 	if ( checkCache( tag, 'decline' ) ) {
 		if ( data !== undefined && tag !== undefined ) {
-			if ( data.success != false && data.active == null ) {
-				var msg = 'An inactive members card was at the space: ' + data.name + ' (' + tag + ')';
+			if ( data.name && device.message.failed ) {
+				var msg = data.name + device.message.failed;
 				postToDiscourse( msg );
-			} else {
-				if ( data.name && device.message.failed ) {
-					var msg = data.name + device.message.failed;
-					postToDiscourse( msg );
-				} else if ( device.message.failed ) {
-					var msg = tag + ' ' + device.message.failed;
-					postToDiscourse( msg );
-				}
+			} else if ( device.message.failed ) {
+				var msg = tag + ' ' + device.message.failed;
+				postToDiscourse( msg );
 			}
 		}
 	}
