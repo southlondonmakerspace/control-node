@@ -18,10 +18,26 @@ var Membership = {
 					name: data.name
 				} );
 			} else {
-				callback( {
+				var response = {
 					valid: false
-				} );
+				};
+				if ( res.statusCode == 403 ) {
+					response.unauthorised = true;
+				} else if ( res.statusCode == 404 ) {
+					response.unknown = true;
+				}
+				callback( response );
 			}
+		} )
+	},
+	unknownTag: function ( tag ) {
+		var response = {
+			active: false,
+			valid: false
+		}
+		id = Membership.hashCard( tag );
+		var url = config.api_url + '/api/event/unknown-tag?api_key=' + config.api_key + '&action=' + tag;
+		request( url, function( err, res, body ) {
 		} )
 	},
 	hashCard: function ( id ) {
