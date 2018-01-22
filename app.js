@@ -145,7 +145,7 @@ function declineClient( client, data, tag ) {
 				var msg = data.name + device.message.failed;
 				postToDiscourse( msg );
 			} else if ( device.message.failed ) {
-				var msg = tag + ' ' + device.message.failed;
+				var msg = 'An unknown tag '+ device.message.failed + ' please register using the membership kiosk.';
 				postToDiscourse( msg );
 			}
 		}
