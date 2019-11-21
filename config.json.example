@@ -23,6 +23,69 @@
 				"success": " operated the shutter.",
 				"failed":  " was prevented from operating the shutter."
 			}
+		},	
+		"laser": {
+			"permission": "laser-cutter",
+			"message": {
+				"success": " operated the laser-cutter.",
+				"failed":  " was prevented from operating the laser-cutter."
+			}
+		},	
+		"3dprinter": {
+			"permission": "3d-printer",
+			"message": {
+				"success": " operated the 3d-printer.",
+				"failed":  " was prevented from operating the 3d-printer."
+			}
+		},	
+		"tablesaw": {
+			"permission": "table-saw",
+			"message": {
+				"success": " operated the table-saw.",
+				"failed":  " was prevented from operating the table-saw."
+			}
+		},	
+		"bandsaw": {
+			"permission": "band-saw",
+			"message": {
+				"success": " operated the band-saw.",
+				"failed":  " was prevented from operating the band-saw."
+			}
+		},	
+		"lathe": {
+			"permission": "lathe-lv1",
+			"message": {
+				"success": " operated the wood lathe.",
+				"failed":  " was prevented from operating the wood lathe."
+			}
+		},	
+		"pillar": {
+			"permission": "pillar-drill",
+			"message": {
+				"success": " operated the pillar-drill.",
+				"failed":  " was prevented from operating the pillar-drill."
+			}
+		},	
+		"planer": {
+			"permission": "planer-thicknesser",
+			"message": {
+				"success": " operated the planer-thicknesser.",
+				"failed":  " was prevented from operating the planer-thicknesser."
+			}
+		},	
+		"morticer": {
+			"permission": "bench-morticer",
+			"message": {
+				"success": " operated the bench-morticer.",
+				"failed":  " was prevented from operating the bench-morticer."
+			}
+		},	
+		"mitre-saw": {
+			"permission": "mitre-saw",
+			"message": {
+				"success": " operated the mitre-saw.",
+				"failed":  " was prevented from operating the mitre-saw."
+			}				
 		}
 	}
 }
